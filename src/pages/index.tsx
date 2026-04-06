@@ -1,11 +1,28 @@
 // CSS Module
 import SearchableLayout from "@/components/searchable-layout";
 import style from "./index.module.css";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import books from "@/mock/books.json";
 import BookItem from "@/components/book-item";
+import { InferGetServerSidePropsType } from "next";
 
-export default function Home() {
+export const getServerSideProps = () => {
+  //컴포넌트보다 먼저 실행해서 데이터 불러옴
+  //console.log('서버실행');
+  const data = 'hello';
+  return { props: {
+    data,
+  } };
+};
+
+export default function Home({data} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+  console.log(data);
+
+  useEffect(() => {
+    console.log('클라이언트 실행');
+  }, []);
+
+
   return (
     <div className={style.container}>
       <section>
