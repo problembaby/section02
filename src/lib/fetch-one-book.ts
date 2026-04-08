@@ -1,13 +1,11 @@
 import { BookData } from "@/types";
 
-export default async function fetchBooks(q?:string) : Promise<BookData[]>{
-    let url = `http://localhost:12345/book`
+export default async function fetchOneBook(
+    id : number
+) : Promise<BookData | null > {
+     const url = `http://localhost:12345/book/${id}`
 
-    if(q){
-        url = `http://localhost:12345/book/search`
-    }
-
-    try{
+       try{
         const response = await fetch(url);
         if(!response.ok){
             throw new Error();   
@@ -15,7 +13,8 @@ export default async function fetchBooks(q?:string) : Promise<BookData[]>{
         return await response.json();
     }catch(err){
         console.error(err);
-        return[];
+        return null;
     
-    }
+
+}
 }
