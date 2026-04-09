@@ -28,7 +28,6 @@ export default function Page({
 
     if (!book) return "문제가 발생했습니다. 다시시도하세요";
   const {
-    id,
     title,
     subTitle,
     description,
